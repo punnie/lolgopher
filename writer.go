@@ -116,11 +116,13 @@ func NewLolWriter() io.Writer {
 }
 
 // NewTruecolorLolWriter will return a new io.Writer with a default ColorMode of truecolor
-func NewTruecolorLolWriter() io.Writer {
+func NewTruecolorLolWriter(force bool) io.Writer {
 	colorMode := ColorModeTrueColor
-	if noColor {
+
+	if !force && noColor {
 		colorMode = ColorMode0
 	}
+
 	return &Writer{
 		Output:    stdout,
 		ColorMode: colorMode,
